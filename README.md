@@ -2,5 +2,6 @@
 
 
 ```bash
-git clone https://github.com/an-lin20/Auto.git && cd Auto && chmod -x file.sh && ./file.sh
+curl -o file.sh https://raw.githubusercontent.com/an-lin20/Auto/main/fille.sh && chmod +x file.sh && ./file.sh
+
 ```
