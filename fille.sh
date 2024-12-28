@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 #
 
-# Coded by M.A.H
-# ID Telegram : @DevUranium
-
-# update system packages
 if [[ $(command -v yum) ]]; then
   yum update -y
   for pkg in perl wget curl screen; do
@@ -25,7 +21,6 @@ if [[ $(command -v apt) ]]; then
   clear
 fi
 
-# function to validate user input for y/n choices
 function validate_yn_input {
   read -rp "$1 " INPUT
   INPUT=$(echo "$INPUT" | tr '[:upper:]' '[:lower:]')
@@ -40,8 +35,6 @@ function validate_yn_input {
   fi
 }
 
-
-# function to validate user input for menu choices
 function validate_menu_input {
   read -rp "$1" INPUT
   while ! [[ "$INPUT" =~ ^[0-9]+$ ]] || (( INPUT < $2 || INPUT > $3 )); do
@@ -50,13 +43,12 @@ function validate_menu_input {
   done
 }
 
-#function for text colors
 BLUE='\033[0;34m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
-# Function to print text in colors
+
 print_b () {
   echo -e "${BLUE}$1${NC}"
 }
@@ -70,9 +62,8 @@ print_g () {
   echo -e "${GREEN}$1${NC}"
 }
 
-# Run hostnamectl and save the output to a variable
 output=$(hostnamectl)
-# Extract the desired information from the output using grep and sed
+
 hostname=$(echo "$output" | grep "Static hostname:" | sed 's/Static hostname:\s*//')
 virtualization=$(echo "$output" | grep "Virtualization:" | sed 's/Virtualization:\s*//')
 os=$(echo "$output" | grep "Operating System:" | sed 's/Operating System:\s*//')
@@ -86,7 +77,7 @@ MEM_TOTAL=$(free -h | awk '/^Mem/ {print $2}')
 HDD_TOTAL=$(df -h --total | tail -n 1 | awk '{print $2}')
 IP_ADDRESS=$(hostname -I | awk '{print $1}')
 
-# Print the extracted information
+
 information () {
 echo -e "\033[33m  Static Hostname\033[0m :\033[34m${hostname}\033[0m"
 echo -e "\033[33m  Virtualization\033[0m :\033[34m${virtualization}\033[0m"
@@ -100,7 +91,7 @@ echo -e "\033[33m  Memory\033[0m : \033[34m${MEM_TOTAL}\033[0m"
 echo -e "\033[33m  Hard Disk\033[0m : \033[34m${HDD_TOTAL}\033[0m"
 echo -e "\033[33m  IP Address\033[0m : \033[34m${IP_ADDRESS}\033[0m"
 }
-# Banner
+
 message='
 
     /$$$$$$              /$$                     /$$$$$$                       /$$               /$$ /$$                    
@@ -111,8 +102,8 @@ message='
   | $$  | $$| $$  | $$  | $$ /$$| $$  | $$        | $$  | $$  | $$ \____  $$  | $$ /$$ /$$__  $$| $$| $$| $$_____/| $$      
   | $$  | $$|  $$$$$$/  |  $$$$/|  $$$$$$/       /$$$$$$| $$  | $$ /$$$$$$$/  |  $$$$/|  $$$$$$$| $$| $$|  $$$$$$$| $$      
   |__/  |__/ \______/    \___/   \______/       |______/|__/  |__/|_______/    \___/   \_______/|__/|__/ \_______/|__/      
-                                                                                                                        #DevURANIUM
-                                                                                                                        @DevURANIUM
+                                                                                                                       
+                                                                                                                        
 '
 cPanel='
        ____                  _ 
